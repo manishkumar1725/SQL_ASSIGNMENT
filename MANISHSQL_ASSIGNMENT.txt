@@ -1,0 +1,825 @@
+**********************************************************************ASSIGNMENT 1********************************************************************************
+1.SQL> select dname from dept;
+
+DNAME
+--------------
+ACCOUNTING
+RESEARCH
+SALES
+OPERATIONS
+
+2.SQL> select ename from emp;
+
+ENAME
+----------
+SMITH
+ALLEN
+WARD
+JONES
+MARTIN
+BLAKE
+CLARK
+SCOTT
+KING
+TURNER
+ADAMS
+
+ENAME
+----------
+JAMES
+FORD
+MILLER
+
+14 rows selected.
+
+3.SQL> select ename from emp where deptno=30;
+
+ENAME
+----------
+ALLEN
+WARD
+MARTIN
+BLAKE
+TURNER
+JAMES
+
+6 rows selected.
+
+4.SQL> select ename from emp where job = 'CLERK';
+
+ENAME
+----------
+SMITH
+ADAMS
+JAMES
+MILLER
+
+5.SQL> select deptno,ename from emp where deptno>=20;
+
+    DEPTNO ENAME
+---------- ----------
+        20 SMITH
+        30 ALLEN
+        30 WARD
+        20 JONES
+        30 MARTIN
+        30 BLAKE
+        20 SCOTT
+        30 TURNER
+        20 ADAMS
+        30 JAMES
+        20 FORD
+
+11 rows selected.
+
+6.SQL> select ename from emp where comm>=sal;
+
+ENAME
+----------
+MARTIN
+
+7.SQL> select ename from emp where comm > (60 * sal)/100;
+
+ENAME
+----------
+MARTIN
+
+8.SQL> select ename from emp where comm > (50 * sal)/100;
+
+ENAME
+----------
+MARTIN
+
+9.SQL> select ename,job,sal from emp where deptno=20 and sal>2000;
+
+ENAME      JOB              SAL
+---------- --------- ----------
+JONES      MANAGER         2975
+SCOTT      ANALYST         3000
+FORD       ANALYST         3000
+
+10.SQL> select ename from emp where job ='SALESMAN' and deptno = 30 and sal >=1500;
+
+ENAME
+----------
+ALLEN
+TURNER
+
+11.SQL> select ename from emp where job ='PRESIDENT' or job ='MANAGER';
+
+ENAME
+----------
+JONES
+BLAKE
+CLARK
+KING
+
+12.SQL> select ename from emp where job='MANAGER' and not deptno =30;
+
+ENAME
+----------
+JONES
+CLARK
+
+13.SQL> select ename from emp where job='MANAGER' union select ename from emp where job='CLERK' and deptno=10;
+
+ENAME
+----------
+BLAKE
+CLARK
+JONES
+MILLER
+
+14.SQL> select ename from emp where job='MANAGER' union select ename from emp where job='CLERK' and deptno=10;
+
+ENAME
+----------
+CLARK
+MILLER
+
+15.SQL> select ename from emp where job='MANAGER' and deptno=10 union select ename from emp where job='CLERK' and deptno=20;
+
+ENAME
+----------
+ADAMS
+CLARK
+SMITH
+
+16.SQL> select ename from emp where not job='MANAGER' and not job='CLERK' and sal>=2000;
+
+ENAME
+----------
+SCOTT
+KING
+FORD
+
+
+17.SQL> select ename from emp where sal between 1200 and 1400;
+
+ENAME
+----------
+WARD
+MARTIN
+MILLER
+
+18.SQL> select ename from emp where job='CLERK' or job='ANALYST' or job='SALESMAN';
+
+ENAME
+----------
+SMITH
+ALLEN
+WARD
+MARTIN
+SCOTT
+TURNER
+ADAMS
+JAMES
+FORD
+MILLER
+
+10 rows selected.
+
+19.SQL> select ename from emp where  job='MANAGER' union select ename from emp where job='PRESIDENT';
+
+ENAME
+----------
+BLAKE
+CLARK
+JONES
+KING
+
+20.SQL> select ename from emp where comm is null;
+
+ENAME
+----------
+SMITH
+JONES
+BLAKE
+CLARK
+SCOTT
+KING
+ADAMS
+JAMES
+FORD
+MILLER
+
+10 rows selected.
+
+21.SQL> select ename from emp where comm = 0;
+
+ENAME
+----------
+TURNER
+
+22.SQL> select job from emp where comm > 0;
+
+JOB
+---------
+SALESMAN
+SALESMAN
+SALESMAN
+
+23.SQL> select ename from emp where comm is null or comm<100;
+
+ENAME
+----------
+SMITH
+JONES
+BLAKE
+CLARK
+SCOTT
+KING
+TURNER
+ADAMS
+JAMES
+FORD
+MILLER
+
+11 rows selected.
+
+25.SQL> select ename from emp where comm+sal>2000;
+
+ENAME
+----------
+MARTIN
+
+26.SQL> select ename from emp where ename like 'M%';
+
+ENAME
+----------
+MARTIN
+MILLER
+
+27.SQL> select ename from emp where ename like '%M';
+
+no rows selected
+
+28.SQL> select ename from emp where ename like '%M%';
+
+ENAME
+----------
+SMITH
+MARTIN
+ADAMS
+JAMES
+MILLER
+
+29.SQL> select ename from emp where ename like '____%n';
+
+no rows selected
+
+30.SQL> select ename from emp where ename like '__R%';
+
+ENAME
+----------
+WARD
+MARTIN
+TURNER
+FORD
+
+31.SQL> select ename from emp where  EXTRACT(MONTH FROM "HIREDATE")=2;
+
+ENAME
+----------
+ALLEN
+WARD
+
+32.SQL> SELECT ENAME FROM EMP WHERE EXTRACT(DAY FROM "HIREDATE") =EXTRACT(DAY FROM LAST_DAY(HIREDATE));
+
+no rows selected
+
+33.SQL> select ename from emp where MONTHS_BETWEEN (SYSDATE,HIREDATE)>144;
+
+ENAME
+----------
+SMITH
+ALLEN
+WARD
+JONES
+MARTIN
+BLAKE
+CLARK
+SCOTT
+KING
+TURNER
+ADAMS
+
+ENAME
+----------
+JAMES
+FORD
+MILLER
+
+14 rows selected.
+
+34.SQL> select ename from emp where job='MANAGER' and EXTRACT(YEAR FROM "HIREDATE")=2007;
+
+no rows selected
+
+35.SQL> select ename || ' , ' || job from emp;
+
+ENAME||','||JOB
+----------------------
+SMITH , CLERK
+ALLEN , SALESMAN
+WARD , SALESMAN
+JONES , MANAGER
+MARTIN , SALESMAN
+BLAKE , MANAGER
+CLARK , MANAGER
+SCOTT , ANALYST
+KING , PRESIDENT
+TURNER , SALESMAN
+ADAMS , CLERK
+
+ENAME||','||JOB
+----------------------
+JAMES , CLERK
+FORD , ANALYST
+MILLER , CLERK
+
+14 rows selected.
+
+36.SQL> select INITCAP(ename) from emp;
+
+INITCAP(EN
+----------
+Smith
+Allen
+Ward
+Jones
+Martin
+Blake
+Clark
+Scott
+King
+Turner
+Adams
+
+INITCAP(EN
+----------
+James
+Ford
+Miller
+
+14 rows selected.
+
+37.SQL> SELECT lPAD(ENAME,15,' ') FROM EMP;
+
+LPAD(ENAME,15,'')
+------------------------------------------------------------
+          SMITH
+          ALLEN
+           WARD
+          JONES
+         MARTIN
+          BLAKE
+          CLARK
+          SCOTT
+           KING
+         TURNER
+          ADAMS
+
+LPAD(ENAME,15,'')
+------------------------------------------------------------
+          JAMES
+           FORD
+         MILLER
+
+14 rows selected.
+
+38.SQL> SELECT RPAD(ENAME,15,'-') FROM EMP;
+
+RPAD(ENAME,15,'-')
+------------------------------------------------------------
+SMITH----------
+ALLEN----------
+WARD-----------
+JONES----------
+MARTIN---------
+BLAKE----------
+CLARK----------
+SCOTT----------
+KING-----------
+TURNER---------
+ADAMS----------
+
+RPAD(ENAME,15,'-')
+------------------------------------------------------------
+JAMES----------
+FORD-----------
+MILLER---------
+
+14 rows selected.
+
+39.SQL> select length(ename) from emp;
+
+LENGTH(ENAME)
+-------------
+            5
+            5
+            4
+            5
+            6
+            5
+            5
+            5
+            4
+            6
+            5
+
+LENGTH(ENAME)
+-------------
+            5
+            4
+            6
+
+14 rows selected.
+
+41.SQL> select trim(leading 'A' FROM ENAME) FROM EMP;
+
+TRIM(LEADI
+----------
+SMITH
+LLEN
+WARD
+JONES
+MARTIN
+BLAKE
+CLARK
+SCOTT
+KING
+TURNER
+DAMS
+
+TRIM(LEADI
+----------
+JAMES
+FORD
+MILLER
+
+42.SQL> select trim(TRAILING 'R' FROM ENAME) FROM EMP;
+
+TRIM(TRAIL
+----------
+SMITH
+ALLEN
+WARD
+JONES
+MARTIN
+BLAKE
+CLARK
+SCOTT
+KING
+TURNE
+ADAMS
+
+TRIM(TRAIL
+----------
+JAMES
+FORD
+MILLE
+
+43.SQL> SELECT SUBSTR(ENAME,1,3) FROM EMP;
+
+SUBSTR(ENAME
+------------
+SMI
+ALL
+WAR
+JON
+MAR
+BLA
+CLA
+SCO
+KIN
+TUR
+ADA
+
+SUBSTR(ENAME
+------------
+JAM
+FOR
+MIL
+
+14 rows selected.
+
+44.SQL> SELECT SUBSTR(ENAME,LENGTH(ENAME)-2,3) FROM EMP;
+
+SUBSTR(ENAME
+------------
+ITH
+LEN
+ARD
+NES
+TIN
+AKE
+ARK
+OTT
+ING
+NER
+AMS
+
+SUBSTR(ENAME
+------------
+MES
+ORD
+LER
+
+14 rows selected.
+
+45.SQL> SELECT REPLACE(ENAME,'A','E') FROM EMP;
+
+REPLACE(EN
+----------
+SMITH
+ELLEN
+WERD
+JONES
+MERTIN
+BLEKE
+CLERK
+SCOTT
+KING
+TURNER
+EDEMS
+
+REPLACE(EN
+----------
+JEMES
+FORD
+MILLER
+
+14 rows selected.
+
+46.SQL> SELECT ENAME,INSTR('AR', ENAME) FROM EMP;
+
+ENAME      INSTR('AR',ENAME)
+---------- -----------------
+SMITH                      0
+ALLEN                      0
+WARD                       0
+JONES                      0
+MARTIN                     0
+BLAKE                      0
+CLARK                      0
+SCOTT                      0
+KING                       0
+TURNER                     0
+ADAMS                      0
+
+ENAME      INSTR('AR',ENAME)
+---------- -----------------
+JAMES                      0
+FORD                       0
+MILLER                     0
+
+14 rows selected.
+
+55.SQL> SELECT ENAME FROM EMP ORDER BY ENAME;
+
+ENAME
+----------
+ADAMS
+ALLEN
+BLAKE
+CLARK
+FORD
+JAMES
+JONES
+KING
+MARTIN
+MILLER
+SCOTT
+
+ENAME
+----------
+SMITH
+TURNER
+WARD
+
+14 rows selected.
+
+56.SQL> SELECT ENAME,HIREDATE FROM EMP ORDER BY HIREDATE;
+
+ENAME      HIREDATE
+---------- ---------
+SMITH      17-DEC-80
+ALLEN      20-FEB-81
+WARD       22-FEB-81
+JONES      02-APR-81
+BLAKE      01-MAY-81
+CLARK      09-JUN-81
+TURNER     08-SEP-81
+MARTIN     28-SEP-81
+KING       17-NOV-81
+JAMES      03-DEC-81
+FORD       03-DEC-81
+
+ENAME      HIREDATE
+---------- ---------
+MILLER     23-JAN-82
+SCOTT      19-APR-87
+ADAMS      23-MAY-87
+
+14 rows selected.
+
+57.SQL> SELECT ENAME,SAL,JOB FROM EMP ORDER BY SAL,JOB;
+
+ENAME             SAL JOB
+---------- ---------- ---------
+SMITH             800 CLERK
+JAMES             950 CLERK
+ADAMS            1100 CLERK
+WARD             1250 SALESMAN
+MARTIN           1250 SALESMAN
+MILLER           1300 CLERK
+TURNER           1500 SALESMAN
+ALLEN            1600 SALESMAN
+CLARK            2450 MANAGER
+BLAKE            2850 MANAGER
+JONES            2975 MANAGER
+
+ENAME             SAL JOB
+---------- ---------- ---------
+SCOTT            3000 ANALYST
+FORD             3000 ANALYST
+KING             5000 PRESIDENT
+
+14 rows selected.
+
+58.SQL> SELECT ENAME,SAL,JOB FROM EMP ORDER BY JOB,SAL DESC;
+
+ENAME             SAL JOB
+---------- ---------- ---------
+FORD             3000 ANALYST
+SCOTT            3000 ANALYST
+MILLER           1300 CLERK
+ADAMS            1100 CLERK
+JAMES             950 CLERK
+SMITH             800 CLERK
+JONES            2975 MANAGER
+BLAKE            2850 MANAGER
+CLARK            2450 MANAGER
+KING             5000 PRESIDENT
+ALLEN            1600 SALESMAN
+
+ENAME             SAL JOB
+---------- ---------- ---------
+TURNER           1500 SALESMAN
+MARTIN           1250 SALESMAN
+WARD             1250 SALESMAN
+
+14 rows selected.
+
+59.SQL> SELECT ENAME,SAL,JOB FROM EMP ORDER BY JOB DESC,SAL DESC;
+
+ENAME             SAL JOB
+---------- ---------- ---------
+ALLEN            1600 SALESMAN
+TURNER           1500 SALESMAN
+WARD             1250 SALESMAN
+MARTIN           1250 SALESMAN
+KING             5000 PRESIDENT
+JONES            2975 MANAGER
+BLAKE            2850 MANAGER
+CLARK            2450 MANAGER
+MILLER           1300 CLERK
+ADAMS            1100 CLERK
+JAMES             950 CLERK
+
+ENAME             SAL JOB
+---------- ---------- ---------
+SMITH             800 CLERK
+FORD             3000 ANALYST
+SCOTT            3000 ANALYST
+
+14 rows selected.
+
+60.SQL> SELECT ENAME,EXTRACT(MONTH FROM "HIREDATE") AS MONTH,EXTRACT(YEAR FROM "HIREDATE") AS YEAR FROM EMP ORDER BY MONTH;
+
+ENAME           MONTH       YEAR
+---------- ---------- ----------
+MILLER              1       1982
+ALLEN               2       1981
+WARD                2       1981
+JONES               4       1981
+SCOTT               4       1987
+ADAMS               5       1987
+BLAKE               5       1981
+CLARK               6       1981
+TURNER              9       1981
+MARTIN              9       1981
+KING               11       1981
+
+ENAME           MONTH       YEAR
+---------- ---------- ----------
+SMITH              12       1980
+JAMES              12       1981
+FORD               12       1981
+
+14 rows selected.
+
+
+*************************************************************************ASSIGNMENT 2:*****************************************************************************
+1.SQL> select emp.ename,emp.sal,dept.dname from emp join dept on emp.deptno=dept.deptno where sal=(select min(sal) from emp);
+
+ENAME             SAL DNAME
+---------- ---------- --------------
+SMITH             800 RESEARCH
+
+
+4.SQL> SELECT EMPNO,ENAME,JOB,MGR,HIREDATE,SAL,DEPTNO FROM EMP WHERE DEPTNO=20;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL     DEPTNO
+---------- ---------- --------- ---------- --------- ---------- ----------
+      7369 SMITH      CLERK           7902 17-DEC-80        800         20
+      7566 JONES      MANAGER         7839 02-APR-81       2975         20
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000         20
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100         20
+      7902 FORD       ANALYST         7566 03-DEC-81       3000         20
+
+5.SQL> SELECT EMPNO,ENAME,JOB,MGR,HIREDATE,SAL,DEPTNO FROM EMP WHERE DEPTNO=30 AND SAL>1650;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL     DEPTNO
+---------- ---------- --------- ---------- --------- ---------- ----------
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850         30
+
+6.SQL> SELECT EMP.EMPNO,EMP.ENAME,EMP.DEPTNO,DEPT.DNAME,DEPT.LOC FROM EMP JOIN DEPT ON EMP.DEPTNO=DEPT.DEPTNO;
+
+     EMPNO ENAME          DEPTNO DNAME          LOC
+---------- ---------- ---------- -------------- -------------
+      7369 SMITH              20 RESEARCH       DALLAS
+      7499 ALLEN              30 SALES          CHICAGO
+      7521 WARD               30 SALES          CHICAGO
+      7566 JONES              20 RESEARCH       DALLAS
+      7654 MARTIN             30 SALES          CHICAGO
+      7698 BLAKE              30 SALES          CHICAGO
+      7782 CLARK              10 ACCOUNTING     NEW YORK
+      7788 SCOTT              20 RESEARCH       DALLAS
+      7839 KING               10 ACCOUNTING     NEW YORK
+      7844 TURNER             30 SALES          CHICAGO
+      7876 ADAMS              20 RESEARCH       DALLAS
+
+     EMPNO ENAME          DEPTNO DNAME          LOC
+---------- ---------- ---------- -------------- -------------
+      7900 JAMES              30 SALES          CHICAGO
+      7902 FORD               20 RESEARCH       DALLAS
+      7934 MILLER             10 ACCOUNTING     NEW YORK
+
+14 rows selected.
+
+7.SQL> select emp.ename,dept.dname,emp.deptno from emp inner join dept on emp.deptno=dept.deptno order by deptno;
+
+ENAME      DNAME              DEPTNO
+---------- -------------- ----------
+CLARK      ACCOUNTING             10
+KING       ACCOUNTING             10
+MILLER     ACCOUNTING             10
+SMITH      RESEARCH               20
+JONES      RESEARCH               20
+SCOTT      RESEARCH               20
+ADAMS      RESEARCH               20
+FORD       RESEARCH               20
+ALLEN      SALES                  30
+WARD       SALES                  30
+MARTIN     SALES                  30
+
+ENAME      DNAME              DEPTNO
+---------- -------------- ----------
+BLAKE      SALES                  30
+TURNER     SALES                  30
+JAMES      SALES                  30
+
+14 rows selected.
+
+8.SQL> SELECT EMP.ENAME,EMP.DEPTNO,DEPT.DNAME,DEPT.LOC FROM EMP JOIN DEPT ON EMP.DEPTNO=DEPT.DEPTNO WHERE LOC='NEW YORK';
+
+ENAME          DEPTNO DNAME          LOC
+---------- ---------- -------------- -------------
+CLARK              10 ACCOUNTING     NEW YORK
+KING               10 ACCOUNTING     NEW YORK
+MILLER             10 ACCOUNTING     NEW YORK
+
+9.SQL> SELECT ENAME,SAL,DNAME FROM EMP JOIN DEPT ON EMP.DEPTNO=DEPT.DEPTNO WHERE SAL IN(SELECT MIN(SAL)  FROM EMP GROUP BY DEPTNO);
+
+ENAME             SAL DNAME
+---------- ---------- --------------
+JAMES             950 SALES
+SMITH             800 RESEARCH
+MILLER           1300 ACCOUNTING
+
+10.SQL> SELECT EMPNO,JOB,MGR,SAL,DNAME FROM EMP JOIN DEPT ON EMP.DEPTNO=DEPT.DEPTNO WHERE SAL IN(SELECT MAX(SAL)  FROM EMP GROUP BY DEPTNO);
+
+     EMPNO JOB              MGR        SAL DNAME
+---------- --------- ---------- ---------- --------------
+      7698 MANAGER         7839       2850 SALES
+      7902 ANALYST         7566       3000 RESEARCH
+      7788 ANALYST         7566       3000 RESEARCH
+      7839 PRESIDENT                  5000 ACCOUNTING
+
+14.SQL> SELECT MAX(SAL) AS SECOND_HIGHEST FROM EMP WHERE SAL<(SELECT MAX(SAL) FROM EMP);
+
+  SECOND_HIGHEST
+----------
+      3000
